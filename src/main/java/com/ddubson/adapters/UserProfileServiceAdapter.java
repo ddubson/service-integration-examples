@@ -4,6 +4,6 @@ import com.ddubson.models.UserProfile;
 
 import java.util.List;
 
-public interface UserInformationServiceAdapter {
+public interface UserProfileServiceAdapter {
 	List<UserProfile> findAll();
 }
