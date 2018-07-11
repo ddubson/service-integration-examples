@@ -45,6 +45,5 @@ public class DownstreamUserProfileServiceAdapterTest {
 		assertThat(userProfiles.get(0).getLastName(), equalTo("There"));
 		assertThat(userProfiles.get(1).getFirstName(), equalTo("Welcome"));
 		assertThat(userProfiles.get(1).getLastName(), equalTo("Home"));
-
 	}
 }
