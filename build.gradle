@@ -9,7 +9,7 @@ dependencies {
     compile 'com.google.guava:guava:23.0'
     compile 'org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE'
     compile 'org.projectlombok:lombok:1.18.0'
-    testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.3.RELEASE'
 }
 
 repositories {
