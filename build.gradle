@@ -3,6 +3,10 @@ plugins {
     id 'application'
 }
 
+repositories {
+    mavenCentral()
+}
+
 mainClassName = 'com.ddubson.App'
 
 dependencies {
@@ -12,6 +16,4 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.3.RELEASE'
 }
 
-repositories {
-    mavenCentral()
-}
+
