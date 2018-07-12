@@ -3,17 +3,15 @@ plugins {
     id 'application'
 }
 
-repositories {
-    mavenCentral()
-}
+apply from: "common.gradle"
 
 mainClassName = 'com.ddubson.App'
 
 dependencies {
     compile 'com.google.guava:guava:23.0'
-    compile 'org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE'
-    compile 'org.projectlombok:lombok:1.18.0'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.3.RELEASE'
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.projectlombok:lombok:$lombokVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 
 

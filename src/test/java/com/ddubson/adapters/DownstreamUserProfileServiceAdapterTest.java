@@ -3,6 +3,7 @@ package com.ddubson.adapters;
 import com.ddubson.models.UserProfile;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.stubbing.answers.AnswersWithDelay;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,37 @@ public class DownstreamUserProfileServiceAdapterTest {
 		assertThat(userProfiles.get(0).getLastName(), equalTo("There"));
 		assertThat(userProfiles.get(1).getFirstName(), equalTo("Welcome"));
 		assertThat(userProfiles.get(1).getLastName(), equalTo("Home"));
+	}
+
+	@Test
+	public void findAll_whenDownstreamServiceIsReturningANullResult_returnsAnEmptyListOfProfiles() {
+		DownstreamUserProfileResponse[] nullBody = null;
+
+		ResponseEntity<DownstreamUserProfileResponse[]> responseEntity =
+				new ResponseEntity<>(nullBody, HttpStatus.OK);
+
+		when(restTemplate.exchange(baseUrl + "/api/users", HttpMethod.GET, null,
+				DownstreamUserProfileResponse[].class)).thenReturn(responseEntity);
+
+		List<UserProfile> userProfiles = adapter.findAll();
+
+		assertEquals(0, userProfiles.size());
+	}
+
+	@Test
+	public void findAll_whenDownstreamServiceIsNotRespondingWithinTimeLimit_returnsAnEmptyList() {
+		DownstreamUserProfileResponse response1 = new DownstreamUserProfileResponse("Hello", "There");
+		DownstreamUserProfileResponse response2 = new DownstreamUserProfileResponse("Welcome", "Home");
+		DownstreamUserProfileResponse[] responses = {response1, response2};
+		ResponseEntity<DownstreamUserProfileResponse[]> responseEntity =
+				new ResponseEntity<>(responses, HttpStatus.OK);
+
+		when(restTemplate.exchange(baseUrl + "/api/users", HttpMethod.GET, null,
+				DownstreamUserProfileResponse[].class))
+				.thenAnswer(new AnswersWithDelay(5000, invocation -> responseEntity));
+
+		List<UserProfile> userProfiles = adapter.findAll();
+
+		assertEquals(0, userProfiles.size());
 	}
 }

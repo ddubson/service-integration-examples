@@ -3,11 +3,9 @@ plugins {
     id 'application'
 }
 
-repositories {
-    mavenCentral()
-}
+apply from: "../common.gradle"
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE"
-    compile 'org.projectlombok:lombok:1.16.18'
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.projectlombok:lombok:$lombokVersion"
 }
