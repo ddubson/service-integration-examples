@@ -1,3 +1,4 @@
 rootProject.name = 'service-integration-example'
 
+include ":address-book-app"
 include ":user-profile-service"

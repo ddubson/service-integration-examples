@@ -1,17 +1,8 @@
-plugins {
-    id 'java'
-    id 'application'
+ext {
+    springBootVersion = '2.0.3.RELEASE'
+    lombokVersion = '1.18.0'
 }
 
-apply from: "common.gradle"
-
-mainClassName = 'com.ddubson.App'
-
-dependencies {
-    compile 'com.google.guava:guava:23.0'
-    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-    compile "org.projectlombok:lombok:$lombokVersion"
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+repositories {
+    mavenCentral()
 }
-
-
