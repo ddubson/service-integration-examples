@@ -1,5 +1,6 @@
-package com.ddubson.adapters;
+package com.ddubson;
 
+import com.ddubson.adapters.UserProfileServiceAdapter;
 import com.ddubson.models.UserProfile;
 import org.junit.Test;
 

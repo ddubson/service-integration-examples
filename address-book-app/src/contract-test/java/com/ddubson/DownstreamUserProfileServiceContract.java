@@ -1,5 +1,7 @@
-package com.ddubson.adapters;
+package com.ddubson;
 
+import com.ddubson.adapters.DownstreamUserProfileServiceAdapter;
+import com.ddubson.adapters.UserProfileServiceAdapter;
 import org.springframework.web.client.RestTemplate;
 
 public class DownstreamUserProfileServiceContract extends UserProfileServiceContract {
