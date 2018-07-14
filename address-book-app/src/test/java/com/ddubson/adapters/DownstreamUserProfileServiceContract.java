@@ -6,7 +6,7 @@ public class DownstreamUserProfileServiceContract extends UserProfileServiceCont
 	private String userProfileServiceUrl = "http://localhost:8081";
 
 	@Override
-	protected UserProfileServiceAdapter userProfileServiceAdapter() {
+	protected UserProfileServiceAdapter fullyOperationalUserProfileService() {
 		return new DownstreamUserProfileServiceAdapter(new RestTemplate(), userProfileServiceUrl);
 	}
 }

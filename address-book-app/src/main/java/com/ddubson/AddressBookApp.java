@@ -12,9 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @Configuration
-public class App {
+public class AddressBookApp {
 	public static void main(String[] args) {
-		SpringApplication.run(App.class);
+		SpringApplication.run(AddressBookApp.class);
 	}
 
 	@Bean
