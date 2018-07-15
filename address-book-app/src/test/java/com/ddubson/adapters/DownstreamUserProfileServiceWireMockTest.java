@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.contains;
 
 public class DownstreamUserProfileServiceWireMockTest {
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(Options.DYNAMIC_PORT);
+	public WireMockRule userProfileServiceMock = new WireMockRule(Options.DYNAMIC_PORT);
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 	private UniformDistribution betweenThreeToFourSeconds = new UniformDistribution(3000, 4000);
@@ -26,16 +26,26 @@ public class DownstreamUserProfileServiceWireMockTest {
 	@Before
 	public void setUp() {
 		AddressBookApp app = new AddressBookApp();
-		String userProfileServiceUrl = String.format("http://localhost:%d", wireMockRule.port());
+		String userProfileServiceUrl = String.format("http://localhost:%d", userProfileServiceMock.port());
 		adapter = app.userProfileServiceAdapter(app.restTemplate(), userProfileServiceUrl);
 	}
 
 	@Test
-	public void findAll_whenDownstreamServiceIsNotRespondingWithinTimeLimit_returnsAnEmptyList() {
+	public void findAll_whenDownstreamServiceIsNotRespondingWithinTimeLimit_throwsAReadTimeOutException() {
 		expectedException.expect(ResourceAccessException.class);
 		expectedException.expectMessage(contains("Read timed out"));
 
 		stubFor(get("/api/users").willReturn(aResponse().withRandomDelay(betweenThreeToFourSeconds)));
+
+		adapter.findAll();
+	}
+
+	@Test
+	public void findAll_whenDownstreamServiceIsNotAvailable_throwsAReadTimeOutException() {
+		expectedException.expect(ResourceAccessException.class);
+		expectedException.expectMessage(contains("Connection refused"));
+
+		userProfileServiceMock.stop();
 
 		adapter.findAll();
 	}

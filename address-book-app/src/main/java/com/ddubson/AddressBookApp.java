@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @Configuration
 public class AddressBookApp {
+	private int twoSecondTimeout = 2000;
+
 	public static void main(String[] args) {
 		SpringApplication.run(AddressBookApp.class);
 	}
@@ -25,6 +27,6 @@ public class AddressBookApp {
 
 	@Bean
 	public RestTemplate restTemplate() {
-		return new RestTemplateBuilder().setReadTimeout(2000).build();
+		return new RestTemplateBuilder().setReadTimeout(twoSecondTimeout).build();
 	}
 }
