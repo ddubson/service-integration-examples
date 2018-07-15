@@ -2,6 +2,7 @@ package com.ddubson;
 
 import com.ddubson.adapters.UserProfileServiceAdapter;
 import com.ddubson.models.UserProfile;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertFalse;
 
 public abstract class UserProfileServiceContract {
 	@Test
+	@Ignore
 	public void findAll_whenServiceIsMalfunctioningWithANullResponse_shallReturnANonEmptyResultSet() {
 		List<UserProfile> userProfiles = fullyOperationalUserProfileService().findAll();
 		assertFalse(userProfiles.isEmpty());

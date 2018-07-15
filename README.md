@@ -1,5 +1,7 @@
 # Service Integration Examples
 
+[![Build Status](https://travis-ci.org/ddubson/service-integration-examples.svg?branch=master)](https://travis-ci.org/ddubson/service-integration-examples)
+
 ## Goals
 
 To gain a greater understanding of service integration points and how to properly test 
