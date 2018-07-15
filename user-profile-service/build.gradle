@@ -5,6 +5,8 @@ plugins {
 
 apply from: "../build.gradle"
 
+mainClassName = "com.ddubson.service.user.profile.UserProfileServiceApp"
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile "org.projectlombok:lombok:$lombokVersion"
