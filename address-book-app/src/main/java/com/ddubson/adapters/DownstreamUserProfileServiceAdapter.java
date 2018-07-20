@@ -1,41 +1,42 @@
 package com.ddubson.adapters;
 
 import com.ddubson.models.UserProfile;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import lombok.NonNull;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class DownstreamUserProfileServiceAdapter implements UserProfileServiceAdapter {
 	private RestTemplate restTemplate;
-	private String userProfileServiceUrl;
+	private URI userProfileServiceUrl;
 
-	public DownstreamUserProfileServiceAdapter(RestTemplate restTemplate,
-											   String userProfileServiceUrl) {
+	public DownstreamUserProfileServiceAdapter(@NonNull RestTemplate restTemplate,
+											   @NonNull String userProfileServiceUrl) {
 		this.restTemplate = restTemplate;
-		this.userProfileServiceUrl = userProfileServiceUrl;
+		this.userProfileServiceUrl = URI.create(userProfileServiceUrl + "/api/users");
 	}
 
 	@Override
 	public List<UserProfile> findAll() {
-		ResponseEntity<DownstreamUserProfileResponse[]> userInformationResponse =
-				this.restTemplate.exchange(userProfileServiceUrl + "/api/users",
-						HttpMethod.GET, null, DownstreamUserProfileResponse[].class);
+		DownstreamUserProfileResponse[] userInformationResponse =
+				this.restTemplate.getForObject(userProfileServiceUrl, DownstreamUserProfileResponse[].class);
 
-		Optional<DownstreamUserProfileResponse[]> downstreamUserProfiles = Optional.ofNullable(
-				userInformationResponse.getBody());
+		DownstreamUserProfileResponse[] downstreamUserProfiles = Optional
+				.ofNullable(userInformationResponse)
+				.orElse(new DownstreamUserProfileResponse[]{});
 
 		return Arrays
-				.stream(downstreamUserProfiles.orElse(new DownstreamUserProfileResponse[]{}))
+				.stream(downstreamUserProfiles)
 				.map(response -> UserProfile
 						.builder()
 						.firstName(response.getFirstName())
 						.lastName(response.getLastName())
 						.build())
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
 }

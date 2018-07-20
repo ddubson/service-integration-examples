@@ -1,13 +1,13 @@
 package com.ddubson.service.user.profile;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
 @Getter
 class UserProfile {
-	private String firstName;
-	private String lastName;
+	private final String firstName;
+	private final String lastName;
 }

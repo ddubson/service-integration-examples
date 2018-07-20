@@ -10,4 +10,5 @@ mainClassName = "com.ddubson.service.user.profile.UserProfileServiceApp"
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile "org.projectlombok:lombok:$lombokVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }

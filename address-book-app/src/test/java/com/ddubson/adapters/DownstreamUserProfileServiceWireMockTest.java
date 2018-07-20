@@ -8,13 +8,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.ResourceAccessException;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static org.mockito.ArgumentMatchers.contains;
+import static org.hamcrest.Matchers.containsString;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DownstreamUserProfileServiceWireMockTest {
 	@Rule
 	public WireMockRule userProfileServiceMock = new WireMockRule(Options.DYNAMIC_PORT);
@@ -33,7 +36,7 @@ public class DownstreamUserProfileServiceWireMockTest {
 	@Test
 	public void findAll_whenDownstreamServiceIsNotRespondingWithinTimeLimit_throwsAReadTimeOutException() {
 		expectedException.expect(ResourceAccessException.class);
-		expectedException.expectMessage(contains("Read timed out"));
+		expectedException.expectMessage(containsString("Read timed out"));
 
 		stubFor(get("/api/users").willReturn(aResponse().withRandomDelay(betweenThreeToFourSeconds)));
 
@@ -43,7 +46,7 @@ public class DownstreamUserProfileServiceWireMockTest {
 	@Test
 	public void findAll_whenDownstreamServiceIsNotAvailable_throwsAReadTimeOutException() {
 		expectedException.expect(ResourceAccessException.class);
-		expectedException.expectMessage(contains("Connection refused"));
+		expectedException.expectMessage(containsString("Connection refused"));
 
 		userProfileServiceMock.stop();
 
