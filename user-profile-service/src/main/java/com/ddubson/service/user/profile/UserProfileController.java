@@ -14,7 +14,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequiredArgsConstructor
 public class UserProfileController {
-	private final InMemoryUserProfileRepository userProfileRepository;
+	private final Repository<UserProfile, Long> userProfileRepository;
 
 	@GetMapping("/api/users")
 	public List<UserProfile> fetchAll() {

@@ -21,7 +21,7 @@ public class UserProfileControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private InMemoryUserProfileRepository userProfileRepository;
+	private Repository<UserProfile, Long> userProfileRepository;
 
 	@Test
 	public void fetchAll_whenQueried_returnsAllUserProfiles() throws Exception {
@@ -51,5 +51,10 @@ public class UserProfileControllerTest {
 	@Test
 	public void findById_whenProvidedAValueThatIsNotAcceptable_returnsBadRequest() throws Exception {
 		mockMvc.perform(get("/api/users/BAD_VALUE")).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void test() throws Exception {
+		mockMvc.perform(get("/api/kt/users/1")).andExpect(status().isOk());
 	}
 }
