@@ -1,5 +1,6 @@
 package com.ddubson.service.user.profile;
 
+import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,17 @@ public class UserProfileController {
 
 	@GetMapping("/api/users/{userId}")
 	public ResponseEntity findUserById(@PathVariable("userId") String userId) {
-		return ok(userProfileRepository.findById(Long.parseLong(userId)));
+		return parseUserId(userId).fold(
+				msg -> ResponseEntity.badRequest().body(msg),
+				id -> ok(userProfileRepository.findById(id))
+		);
+	}
+
+	private Either<String, Long> parseUserId(String userId) {
+		if(userId.matches("\\d*")) {
+			return Either.right(Long.parseLong(userId));
+		} else {
+			return Either.left("User ID has to be a number");
+		}
 	}
 }

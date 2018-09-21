@@ -3,6 +3,7 @@ ext {
     lombokVersion = "1.18.2"
     wireMockVersion = "2.18.0"
     guavaVersion = "23.0"
+    vavrVersion = "0.9.2"
 }
 
 repositories {

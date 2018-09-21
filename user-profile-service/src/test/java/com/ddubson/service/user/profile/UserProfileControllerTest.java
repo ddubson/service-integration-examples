@@ -47,4 +47,9 @@ public class UserProfileControllerTest {
 				.andExpect(jsonPath("$.firstName").value("John"))
 				.andExpect(jsonPath("$.lastName").value("Smith"));
 	}
+
+	@Test
+	public void findById_whenProvidedAValueThatIsNotAcceptable_returnsBadRequest() throws Exception {
+		mockMvc.perform(get("/api/users/BAD_VALUE")).andExpect(status().isBadRequest());
+	}
 }
