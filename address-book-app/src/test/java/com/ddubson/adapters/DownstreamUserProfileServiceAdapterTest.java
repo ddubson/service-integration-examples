@@ -18,8 +18,8 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DownstreamUserProfileServiceAdapterTest {
+	private final String baseUrl = "BASE_URL";
 	private DownstreamUserProfileServiceAdapter adapter;
-	private String baseUrl = "BASE_URL";
 	private URI fetchAllUsersUrl;
 	@Mock
 	private RestTemplate restTemplate;

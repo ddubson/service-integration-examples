@@ -25,13 +25,26 @@ public class UserProfileControllerTest {
 
 	@Test
 	public void fetchAll_whenQueried_returnsAllUserProfiles() throws Exception {
-		UserProfile userProfile1 = UserProfile.builder().firstName("John").lastName("Smith").build();
-		UserProfile userProfile2 = UserProfile.builder().firstName("Jane").lastName("Adams").build();
+		UserProfile userProfile1 = UserProfile.builder().userId(1L).firstName("John").lastName("Smith").build();
+		UserProfile userProfile2 = UserProfile.builder().userId(2L).firstName("Jane").lastName("Adams").build();
 		when(userProfileRepository.fetchAll()).thenReturn(asList(userProfile1, userProfile2));
 
 		mockMvc.perform(get("/api/users"))
 				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].userId").value(1))
 				.andExpect(jsonPath("$[0].firstName").value("John"))
 				.andExpect(jsonPath("$[0].lastName").value("Smith"));
+	}
+
+	@Test
+	public void findById_whenProvidedValidUserId_returnsSingleResultWithUserInformation() throws Exception {
+		UserProfile userProfile = UserProfile.builder().userId(2L).firstName("John").lastName("Smith").build();
+		when(userProfileRepository.findById(2L)).thenReturn(userProfile);
+
+		mockMvc.perform(get(String.format("/api/users/%d", 2)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.userId").value(2))
+				.andExpect(jsonPath("$.firstName").value("John"))
+				.andExpect(jsonPath("$.lastName").value("Smith"));
 	}
 }

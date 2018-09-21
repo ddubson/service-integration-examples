@@ -23,7 +23,7 @@ public class DownstreamUserProfileServiceWireMockTest {
 	public WireMockRule userProfileServiceMock = new WireMockRule(Options.DYNAMIC_PORT);
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
-	private UniformDistribution betweenThreeToFourSeconds = new UniformDistribution(3000, 4000);
+	private final UniformDistribution betweenThreeToFourSeconds = new UniformDistribution(3000, 4000);
 	private UserProfileServiceAdapter adapter;
 
 	@Before

@@ -26,12 +26,10 @@ public class DownstreamUserProfileServiceAdapter implements UserProfileServiceAd
 		DownstreamUserProfileResponse[] userInformationResponse =
 				this.restTemplate.getForObject(userProfileServiceUrl, DownstreamUserProfileResponse[].class);
 
-		DownstreamUserProfileResponse[] downstreamUserProfiles = Optional
-				.ofNullable(userInformationResponse)
+		DownstreamUserProfileResponse[] downstreamUserProfiles = Optional.ofNullable(userInformationResponse)
 				.orElse(new DownstreamUserProfileResponse[]{});
 
-		return Arrays
-				.stream(downstreamUserProfiles)
+		return Arrays.stream(downstreamUserProfiles)
 				.map(response -> UserProfile
 						.builder()
 						.firstName(response.getFirstName())

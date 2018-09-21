@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @Getter
 class UserProfile {
+	private final Long userId;
 	private final String firstName;
 	private final String lastName;
 }
