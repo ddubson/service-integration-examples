@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class UserProfileController {
-	private final UserProfileRepository userProfileRepository;
+	private final InMemoryUserProfileRepository userProfileRepository;
 
 	@GetMapping("/api/users")
 	public List<UserProfile> fetchAll() {

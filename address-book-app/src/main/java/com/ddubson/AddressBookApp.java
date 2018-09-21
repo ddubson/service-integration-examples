@@ -21,7 +21,7 @@ public class AddressBookApp {
 
 	@Bean
 	public UserProfileServiceAdapter userProfileServiceAdapter(RestTemplate restTemplate,
-															   @Value("service.user-profile.url") String userProfileServiceUrl) {
+															   @Value("${service.user-profile.url}") String userProfileServiceUrl) {
 		return new DownstreamUserProfileServiceAdapter(restTemplate, userProfileServiceUrl);
 	}
 

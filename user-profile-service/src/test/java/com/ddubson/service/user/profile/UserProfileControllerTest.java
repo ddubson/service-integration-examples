@@ -21,7 +21,7 @@ public class UserProfileControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private UserProfileRepository userProfileRepository;
+	private InMemoryUserProfileRepository userProfileRepository;
 
 	@Test
 	public void fetchAll_whenQueried_returnsAllUserProfiles() throws Exception {

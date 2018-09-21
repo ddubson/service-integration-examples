@@ -1,6 +1,6 @@
 ext {
     springBootVersion = "2.0.3.RELEASE"
-    lombokVersion = "1.18.0"
+    lombokVersion = "1.18.2"
     wireMockVersion = "2.18.0"
     guavaVersion = "23.0"
 }
