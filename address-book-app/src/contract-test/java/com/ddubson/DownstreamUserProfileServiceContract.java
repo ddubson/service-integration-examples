@@ -5,7 +5,7 @@ import com.ddubson.adapters.UserProfileServiceAdapter;
 import org.springframework.web.client.RestTemplate;
 
 public class DownstreamUserProfileServiceContract extends UserProfileServiceContract {
-	private String userProfileServiceUrl = "http://localhost:8081";
+	private final String userProfileServiceUrl = "http://localhost:8081";
 
 	@Override
 	protected UserProfileServiceAdapter fullyOperationalUserProfileService() {

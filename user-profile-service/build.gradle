@@ -4,14 +4,13 @@ apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile "org.jetbrains.kotlin:kotlin-reflect"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.projectlombok:lombok:$lombokVersion"
-    compile "io.vavr:vavr:$vavrVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "io.vavr:vavr:$vavrVersion"
 
-    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
 compileKotlin { kotlinOptions { jvmTarget = "1.8" } }

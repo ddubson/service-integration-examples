@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
+
 @SpringBootApplication
 @Configuration
 public class AddressBookApp {
-	private int twoSecondTimeout = 2000;
-
 	public static void main(String[] args) {
 		SpringApplication.run(AddressBookApp.class);
 	}
@@ -27,6 +27,6 @@ public class AddressBookApp {
 
 	@Bean
 	public RestTemplate restTemplate() {
-		return new RestTemplateBuilder().setReadTimeout(twoSecondTimeout).build();
+		return new RestTemplateBuilder().setReadTimeout(Duration.ofSeconds(2)).build();
 	}
 }
