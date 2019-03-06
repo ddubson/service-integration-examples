@@ -1,17 +1,12 @@
-plugins {
-    id "java"
-    id "application"
-}
-
-apply from: "../build.gradle"
-
-mainClassName = "com.ddubson.App"
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
 
 dependencies {
     compile "com.google.guava:guava:$guavaVersion"
-    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.projectlombok:lombok:$lombokVersion"
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "com.github.tomakehurst:wiremock:$wireMockVersion"
 }
 
